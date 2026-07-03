@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ADC Monitoring by Arif Muchlasin</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>ADC Monitoring</h1>
+
+        <h3>by Arif Muchlasin</h3>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card blue">
+
+            <h2>Nilai ADC</h2>
+
+            <p>{{ latest }}</p>
+
+        </div>
+
+        <div class="card green">
+
+            <h2>Jumlah Data</h2>
+
+            <p>{{ total }}</p>
+
+        </div>
+
+        <div class="card orange">
+
+            <h2>Jam</h2>
+
+            <p id="clock">--:--:--</p>
+
+        </div>
+
+    </div>
+
+    <div class="button-box">
+
+        <a href="/download" class="btn download">
+            Download CSV
+        </a>
+
+        <a href="/delete"
+           class="btn delete"
+           onclick="return confirm('Yakin ingin menghapus semua data?')">
+           Hapus Data
+        </a>
+
+    </div>
+
+    <div class="chart-box">
+
+        <h2>Grafik ADC</h2>
+
+        <canvas id="adcChart"></canvas>
+
+    </div>
+
+    <div class="table-box">
+
+        <h2>Riwayat Data ADC</h2>
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>ADC</th>
+
+                <th>Waktu</th>
+
+            </tr>
+
+            {% for row in data %}
+
+            <tr>
+
+                <td>{{ row[0] }}</td>
+
+                <td>{{ row[1] }}</td>
+
+                <td>{{ row[2] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
